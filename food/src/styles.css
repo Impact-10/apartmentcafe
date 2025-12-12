@@ -1728,7 +1728,6 @@ button:focus-visible {
   .item-card:hover {
     transform: none;
   }
-  }
 
   .modal {
     width: 600px;
