@@ -72,6 +72,7 @@ body {
   top: 0;
   z-index: 100;
   box-shadow: none;
+  position: relative;
 }
 
 .header-content-clean {
@@ -193,6 +194,13 @@ body {
   padding: 3rem 0;
   background: #fafafa;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.main-content-new > *:not(canvas) {
+  position: relative;
+  z-index: 2;
 }
 
 .container-new {
@@ -1857,12 +1865,16 @@ button:focus-visible {
 
 .item-count {
   font-size: 0.95rem;
-  color: #999;
-  font-weight: 500;
+  color: #666;
+  font-weight: 600;
+  background: #f5f5f5;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
 }
 
 .menu-items-container {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   padding: 0 1rem;
 }

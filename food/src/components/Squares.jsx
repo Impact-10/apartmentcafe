@@ -2,11 +2,11 @@ import { useRef, useEffect } from 'react';
 import './Squares.css';
 
 const Squares = ({
-  direction = 'right',
-  speed = 1,
-  borderColor = '#f0f0f0',
-  squareSize = 40,
-  hoverFillColor = '#fff5f2',
+  direction = 'down',
+  speed = 0.8,
+  borderColor = '#e0e0e0',
+  squareSize = 60,
+  hoverFillColor = 'rgba(255, 107, 53, 0.08)',
   className = ''
 }) => {
   const canvasRef = useRef(null);
