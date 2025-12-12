@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { useCart } from '../hooks/useCart';
 import { motion } from 'framer-motion';
+import { ScrollStackItem } from './ScrollStack';
 
-/**
- * ItemCard component
- * Displays a menu item with image, name, price, description and quantity controls
- */
-export default function ItemCard({ item }) {
+export default function ItemCard({ item, index = 0 }) {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
@@ -30,67 +27,76 @@ export default function ItemCard({ item }) {
   };
 
   return (
-    <motion.div
-      className="item-card scroll-stack-item"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      {item.imageUrl && (
-        <div className="item-image">
-          <img src={item.imageUrl} alt={item.name} loading="lazy" />
-        </div>
-      )}
-      
-      <div className="item-content">
-        <div className="item-header">
-          <h3 className="item-name">{item.name}</h3>
-          <span className="item-price">₹{item.price}</span>
-        </div>
-        
-        {item.description && (
-          <p className="item-description">{item.description}</p>
-        )}
-        
-        <div className="item-actions">
-          <div className="quantity-control">
-            <button
-              className="qty-btn"
-              onClick={handleDecrement}
-              disabled={quantity <= 1}
-              aria-label="Decrease quantity"
-            >
-              <i className="bi bi-dash"></i>
-            </button>
-            <span className="qty-value">{quantity}</span>
-            <button
-              className="qty-btn"
-              onClick={handleIncrement}
-              disabled={quantity >= 10}
-              aria-label="Increase quantity"
-            >
-              <i className="bi bi-plus"></i>
-            </button>
-          </div>
-          
-          <motion.button
-            className={`add-btn ${isAdding ? 'adding' : ''}`}
-            onClick={handleAddToCart}
-            disabled={isAdding}
-            whileTap={{ scale: 0.95 }}
-          >
-            {isAdding ? (
-              <>
-                <i className="bi bi-check-lg"></i> Added!
-              </>
+    <ScrollStackItem>
+      <motion.div
+        className="item-card-stack"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="stack-card-content">
+          {/* Image Section - Fixed Grid */}
+          <div className="stack-image-grid">
+            {item.imageUrl ? (
+              <img 
+                src={item.imageUrl} 
+                alt={item.name} 
+                loading="lazy"
+                className="stack-image"
+              />
             ) : (
-              <>
-                <i className="bi bi-cart-plus"></i> Add
-              </>
+              <div className="stack-image-placeholder">
+                <i className="bi bi-image"></i>
+              </div>
             )}
-          </motion.button>
+          </div>
+
+          {/* Content Section */}
+          <div className="stack-card-info">
+            <div className="stack-header">
+              <h3 className="stack-name">{item.name}</h3>
+              <span className="stack-price">₹{item.price}</span>
+            </div>
+
+            {item.description && (
+              <p className="stack-description">{item.description}</p>
+            )}
+
+            <div className="stack-actions">
+              <div className="stack-qty-control">
+                <button
+                  className="qty-stack-btn"
+                  onClick={handleDecrement}
+                  disabled={quantity <= 1}
+                  aria-label="Decrease"
+                >
+                  <i className="bi bi-minus"></i>
+                </button>
+                <span className="qty-stack-value">{quantity}</span>
+                <button
+                  className="qty-stack-btn"
+                  onClick={handleIncrement}
+                  disabled={quantity >= 10}
+                  aria-label="Increase"
+                >
+                  <i className="bi bi-plus"></i>
+                </button>
+              </div>
+
+              <motion.button
+                className={`add-to-cart-btn ${isAdding ? 'added' : ''}`}
+                onClick={handleAddToCart}
+                disabled={isAdding}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <i className={`bi ${isAdding ? 'bi-check-circle-fill' : 'bi-bag-plus'}`}></i>
+                <span>{isAdding ? 'Added!' : 'Add to Cart'}</span>
+              </motion.button>
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </ScrollStackItem>
   );
 }

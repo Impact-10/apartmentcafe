@@ -3,7 +3,7 @@ import '../../models/menu_item.dart';
 import '../../services/firebase_service.dart';
 
 class MasterItemEditor extends StatefulWidget {
-  const MasterItemEditor({Key? key}) : super(key: key);
+  const MasterItemEditor({super.key});
 
   @override
   State<MasterItemEditor> createState() => _MasterItemEditorState();
@@ -116,7 +116,7 @@ class _MasterItemEditorState extends State<MasterItemEditor> {
 class ItemEditDialog extends StatefulWidget {
   final MenuItem? item;
 
-  const ItemEditDialog({Key? key, required this.item}) : super(key: key);
+  const ItemEditDialog({super.key, required this.item});
 
   @override
   State<ItemEditDialog> createState() => _ItemEditDialogState();

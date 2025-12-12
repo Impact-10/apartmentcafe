@@ -61,7 +61,7 @@ class AdminMenuProvider with ChangeNotifier {
   }
 
   Future<void> publishActiveMenu(Map<String, Map<String, dynamic>> menuMap) async {
-    final opId = 'publish_active_menu';
+    const opId = 'publish_active_menu';
     _pendingOperations.add(opId);
     notifyListeners();
     try {

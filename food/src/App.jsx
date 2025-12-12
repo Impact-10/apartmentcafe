@@ -15,6 +15,19 @@ import './styles.css';
 
 function HomePage() {
   const { menu, loading, error } = useMenuRTDB();
+  const [activeMeal, setActiveMeal] = useState('breakfast');
+
+  // Auto-select first available meal if current is empty
+  useEffect(() => {
+    if (!loading && menu) {
+      if (menu[activeMeal]?.length === 0) {
+        const available = ['breakfast', 'lunch', 'snack', 'dinner'].find(
+          meal => menu[meal]?.length > 0
+        );
+        if (available) setActiveMeal(available);
+      }
+    }
+  }, [menu, loading, activeMeal]);
 
   if (loading) {
     return (
@@ -48,43 +61,27 @@ function HomePage() {
     );
   }
 
+  // Map meal IDs to display data
+  const mealData = {
+    breakfast: { title: 'Breakfast', icon: 'bi-sunrise' },
+    lunch: { title: 'Lunch', icon: 'bi-sun' },
+    snack: { title: 'Evening Snack', icon: 'bi-cup-hot' },
+    dinner: { title: 'Dinner', icon: 'bi-moon-stars' }
+  };
+
+  const currentMeal = mealData[activeMeal];
+
   return (
     <>
-      <Header />
+      <Header activeMeal={activeMeal} onMealChange={setActiveMeal} />
       
-      <main className="main-content">
-        <div className="container">
-          {menu.breakfast.length > 0 && (
-            <MenuSection
-              title="Breakfast"
-              items={menu.breakfast}
-              icon="bi-sunrise"
-            />
-          )}
-          
-          {menu.lunch.length > 0 && (
-            <MenuSection
-              title="Lunch"
-              items={menu.lunch}
-              icon="bi-sun"
-            />
-          )}
-          
-          {menu.snack.length > 0 && (
-            <MenuSection
-              title="Evening Snack"
-              items={menu.snack}
-              icon="bi-cup-hot"
-            />
-          )}
-          
-          {menu.dinner.length > 0 && (
-            <MenuSection
-              title="Dinner"
-              items={menu.dinner}
-              icon="bi-moon-stars"
-            />
-          )}
+      <main className="main-content-new">
+        <div className="container-new">
+          <MenuSection
+            title={currentMeal.title}
+            items={menu[activeMeal] || []}
+            icon={currentMeal.icon}
+          />
         </div>
       </main>
 

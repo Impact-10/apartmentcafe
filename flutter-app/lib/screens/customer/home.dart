@@ -8,7 +8,7 @@ import '../../services/schedule_service.dart';
 import 'cart.dart';
 
 class CustomerHome extends StatefulWidget {
-  const CustomerHome({Key? key}) : super(key: key);
+  const CustomerHome({super.key});
 
   @override
   State<CustomerHome> createState() => _CustomerHomeState();

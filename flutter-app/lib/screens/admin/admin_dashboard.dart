@@ -8,7 +8,7 @@ import 'schedule_editor.dart';
 import 'admin_orders.dart';
 
 class AdminDashboard extends StatefulWidget {
-  const AdminDashboard({Key? key}) : super(key: key);
+  const AdminDashboard({super.key});
 
   @override
   State<AdminDashboard> createState() => _AdminDashboardState();
@@ -72,8 +72,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               color: Colors.orange.shade700,
-              child: Row(
-                children: const [
+              child: const Row(
+                children: [
                   Icon(Icons.cloud_off, color: Colors.white, size: 20),
                   SizedBox(width: 8),
                   Expanded(

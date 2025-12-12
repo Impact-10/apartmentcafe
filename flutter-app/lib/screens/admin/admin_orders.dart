@@ -5,7 +5,7 @@ import '../../services/firebase_service.dart';
 import '../../providers/connection_provider.dart';
 
 class AdminOrders extends StatefulWidget {
-  const AdminOrders({Key? key}) : super(key: key);
+  const AdminOrders({super.key});
 
   @override
   State<AdminOrders> createState() => _AdminOrdersState();

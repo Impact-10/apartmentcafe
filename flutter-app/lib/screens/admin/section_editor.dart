@@ -5,7 +5,7 @@ import '../../services/firebase_service.dart';
 import '../../providers/connection_provider.dart';
 
 class SectionEditor extends StatefulWidget {
-  const SectionEditor({Key? key}) : super(key: key);
+  const SectionEditor({super.key});
 
   @override
   State<SectionEditor> createState() => _SectionEditorState();
@@ -52,6 +52,8 @@ class _SectionEditorState extends State<SectionEditor> {
       if (proceed != true) return;
     }
 
+    if (!mounted) return;
+
     // Confirm dialog
     final confirmed = await showDialog<bool>(
       context: context,
@@ -75,8 +77,9 @@ class _SectionEditorState extends State<SectionEditor> {
 
     if (confirmed != true) return;
 
+    if (!mounted) return;
     setState(() => _publishing = true);
-    final opId = 'publish_menu';
+    const opId = 'publish_menu';
     connectionProvider.addPendingOperation(opId);
 
     try {

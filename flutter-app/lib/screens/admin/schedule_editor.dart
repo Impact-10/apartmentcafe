@@ -4,7 +4,7 @@ import '../../services/firebase_service.dart';
 import '../../services/schedule_service.dart';
 
 class ScheduleEditor extends StatefulWidget {
-  const ScheduleEditor({Key? key}) : super(key: key);
+  const ScheduleEditor({super.key});
 
   @override
   State<ScheduleEditor> createState() => _ScheduleEditorState();

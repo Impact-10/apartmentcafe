@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import '../models/schedule.dart';
 import 'firebase_service.dart';
@@ -70,7 +71,7 @@ class ScheduleService {
         }
       });
     } catch (e) {
-      print('Auto-deactivate error: $e');
+      debugPrint('Auto-deactivate error: $e');
     }
   }
 }
