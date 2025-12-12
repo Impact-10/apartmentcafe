@@ -46,6 +46,12 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.app-container {
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -65,7 +71,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
 }
 
 .header-content-clean {
@@ -196,33 +202,7 @@ body {
   padding: 0 2rem;
 }
 
-/* ============================================
-   MENU SECTION HEADER - CLEAN
-   ============================================ */
-.section-header-stack {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid #e0e0e0;
-}
 
-.section-header-stack h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-  color: #1a1a1a;
-  letter-spacing: -0.5px;
-}
-
-.item-count-stack {
-  font-size: 0.9rem;
-  color: #999;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
 
 /* ============================================
    MENU SECTION
@@ -261,29 +241,7 @@ body {
   font-weight: 600;
 }
 
-/* ============================================
-   SCROLL STACK & MENU GRID
-   ============================================ */
-.scroll-stack-container {
-  position: relative;
-}
 
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.scroll-stack-item {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.scroll-stack-item.scroll-stack-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* ============================================
    ITEM CARD
@@ -1242,31 +1200,30 @@ button:focus-visible {
 }
 
 /* ============================================
-   RESPONSIVE DESIGN FOR SCROLLSTACK CARDS
+   RESPONSIVE DESIGN FOR CARDS
    ============================================ */
 
 /* Tablet & Below */
 @media (max-width: 1024px) {
-  .stack-card-content {
-    padding: 2rem;
-    gap: 2.5rem;
+  .card-content {
+    padding: 1.8rem;
+    gap: 1.8rem;
   }
 
-  .stack-image-grid {
+  .card-image-wrapper {
     width: 280px;
-    height: 220px;
-    flex-shrink: 0;
+    height: 210px;
   }
 
-  .stack-name {
-    font-size: 1.6rem;
+  .card-name {
+    font-size: 1.5rem;
   }
 
-  .stack-price {
+  .card-price {
     font-size: 1.3rem;
   }
 
-  .stack-description {
+  .card-description {
     font-size: 0.95rem;
   }
 }
@@ -1302,38 +1259,37 @@ button:focus-visible {
     font-size: 0.95rem;
   }
 
-  .stack-card-content {
-    grid-template-columns: 260px 1fr;
-    padding: 1.8rem;
-    gap: 2rem;
+  .card-content {
+    grid-template-columns: 240px 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
 
-  .stack-image-grid {
-    width: 260px;
-    height: 200px;
-    order: -1;
+  .card-image-wrapper {
+    width: 240px;
+    height: 180px;
   }
 
-  .stack-name {
-    font-size: 1.4rem;
+  .card-name {
+    font-size: 1.3rem;
   }
 
-  .stack-price {
+  .card-price {
     font-size: 1.2rem;
   }
 
-  .stack-description {
+  .card-description {
     font-size: 0.9rem;
     line-height: 1.4;
   }
 
-  .qty-stack-btn {
+  .qty-btn {
     width: 36px;
     height: 36px;
     font-size: 1rem;
   }
 
-  .qty-stack-value {
+  .qty-value {
     font-size: 0.95rem;
   }
 
@@ -1404,38 +1360,37 @@ button:focus-visible {
     padding: 0.2rem 0.4rem;
   }
 
-  .stack-card-content {
+  .card-content {
     grid-template-columns: 1fr;
     padding: 1.5rem;
     gap: 1.5rem;
   }
 
-  .stack-image-grid {
+  .card-image-wrapper {
     width: 100%;
     height: 200px;
-    order: -1;
   }
 
-  .stack-name {
+  .card-name {
     font-size: 1.2rem;
   }
 
-  .stack-price {
+  .card-price {
     font-size: 1.1rem;
   }
 
-  .stack-description {
+  .card-description {
     font-size: 0.85rem;
     line-height: 1.3;
   }
 
-  .qty-stack-btn {
+  .qty-btn {
     width: 32px;
     height: 32px;
     font-size: 0.9rem;
   }
 
-  .qty-stack-value {
+  .qty-value {
     font-size: 0.9rem;
   }
 
@@ -1445,11 +1400,11 @@ button:focus-visible {
     font-size: 0.95rem;
   }
 
-  .stack-actions {
+  .card-actions {
     flex-direction: column;
   }
 
-  .stack-qty-control {
+  .qty-control {
     width: 100%;
     justify-content: space-between;
   }
@@ -1878,52 +1833,70 @@ button:focus-visible {
    PROFESSIONAL MINIMAL UI - 5 STAR HOTEL STYLE
    ============================================ */
 
-/* Menu Section Stack */
-.menu-section-stack {
+/* Menu Section */
+.menu-section {
   width: 100%;
-  margin: 0;
+  margin: 0 0 4rem 0;
   padding: 0;
 }
 
-.scroll-stack-menu {
-  padding-top: 2rem !important;
-  padding-bottom: 20rem !important;
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
-/* Stacked Card Layout - Clean Professional Design */
-.item-card-stack {
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.item-count {
+  font-size: 0.95rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.menu-items-container {
+  display: grid;
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* Item Card - Clean Professional Design */
+.item-card {
   width: 100%;
-  height: auto;
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
 }
 
-.stack-card-content {
+.card-content {
   display: grid;
   grid-template-columns: 300px 1fr;
-  gap: 3rem;
+  gap: 2rem;
   align-items: stretch;
-  padding: 3rem;
-  border-radius: 16px;
+  padding: 2rem;
+  border-radius: 12px;
   background: white;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  min-height: 240px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  min-height: 220px;
   border: 1px solid #f0f0f0;
 }
 
-.stack-card-content:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+.card-content:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Image Grid Section */
-.stack-image-grid {
+/* Image Section */
+.card-image-wrapper {
   position: relative;
   width: 300px;
-  height: 240px;
+  height: 220px;
   border-radius: 12px;
   overflow: hidden;
   background: #f5f5f5;
@@ -1933,22 +1906,15 @@ button:focus-visible {
   flex-shrink: 0;
 }
 
-.stack-image {
+.card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
   display: block;
-  backface-visibility: hidden;
 }
 
-.stack-card-content:hover .stack-image {
-  transform: scale(1.05);
-}
-
-.stack-image-placeholder {
+.card-image-placeholder {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1961,22 +1927,22 @@ button:focus-visible {
 }
 
 /* Card Info Section */
-.stack-card-info {
+.card-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
   min-width: 0;
 }
 
-.stack-header {
+.card-header {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
-.stack-name {
-  font-size: 1.8rem;
+.card-name {
+  font-size: 1.6rem;
   font-weight: 600;
   line-height: 1.3;
   margin: 0;
@@ -1984,28 +1950,28 @@ button:focus-visible {
   letter-spacing: -0.5px;
 }
 
-.stack-price {
-  font-size: 1.5rem;
+.card-price {
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--primary-color);
 }
 
-.stack-description {
+.card-description {
   font-size: 0.95rem;
   color: #666;
   line-height: 1.6;
   margin: 0;
 }
 
-/* Stack Actions */
-.stack-actions {
+/* Card Actions */
+.card-actions {
   display: flex;
   gap: 1rem;
   align-items: center;
   margin-top: auto;
 }
 
-.stack-qty-control {
+.qty-control {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -2015,7 +1981,7 @@ button:focus-visible {
   border: 1px solid #e0e0e0;
 }
 
-.qty-stack-btn {
+.qty-btn {
   width: 36px;
   height: 36px;
   border-radius: 6px;
@@ -2028,26 +1994,24 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  will-change: transform, background;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
 
-.qty-stack-btn:hover:not(:disabled) {
+.qty-btn:hover:not(:disabled) {
   background: #f0f0f0;
   color: var(--primary-color);
-  transform: scale(1.1);
 }
 
-.qty-stack-btn:active:not(:disabled) {
-  transform: scale(0.95);
+.qty-btn:active:not(:disabled) {
+  opacity: 0.8;
 }
 
-.qty-stack-btn:disabled {
+.qty-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.qty-stack-value {
+.qty-value {
   font-size: 1.2rem;
   font-weight: 600;
   min-width: 30px;
@@ -2068,97 +2032,43 @@ button:focus-visible {
   cursor: pointer;
   display: flex;
   align-items: center;
-  will-change: background, box-shadow, transform;
   justify-content: center;
   gap: 0.65rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
-  position: relative;
-  overflow: hidden;
-  filter: none !important;
-  -webkit-filter: none !important;
-}
-
-.add-to-cart-btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.add-to-cart-btn:hover::before {
-  width: 300px;
-  height: 300px;
+  transition: background 0.2s ease;
 }
 
 .add-to-cart-btn:hover {
   background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
 }
 
 .add-to-cart-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+  opacity: 0.9;
 }
 
 .add-to-cart-btn.added {
   background: #4caf50;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
 }
 
 .add-to-cart-btn i {
   font-size: 1.3rem;
-  position: relative;
-  z-index: 1;
-}
-
-.add-to-cart-btn span {
-  position: relative;
-  z-index: 1;
 }
 
 /* Empty Menu */
-.empty-menu-stack {
+.empty-menu {
   text-align: center;
   padding: 6rem 2rem;
   color: #999;
 }
 
-.empty-menu-stack i {
+.empty-menu i {
   font-size: 4rem;
   opacity: 0.2;
   margin-bottom: 1.5rem;
   color: #ccc;
 }
 
-.empty-menu-stack p {
+.empty-menu p {
   font-size: 1.2rem;
   font-weight: 500;
   color: #666;
-}
-
-
-  margin: 0;
-  padding: 0;
-}
-
-.scroll-stack-menu {
-  padding-top: 1rem !important;
-  padding-bottom: 20rem !important;
-}
-
-.item-card-stack {
-  width: 100%;
-  height: auto;
-  will-change: auto;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  perspective: 1000px;
 }

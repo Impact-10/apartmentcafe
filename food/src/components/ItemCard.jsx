@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useCart } from '../hooks/useCart';
 import { motion } from 'framer-motion';
-import { ScrollStackItem } from './ScrollStack';
 
 export default function ItemCard({ item, index = 0 }) {
   const { addToCart } = useCart();
@@ -27,54 +26,53 @@ export default function ItemCard({ item, index = 0 }) {
   };
 
   return (
-    <ScrollStackItem>
-      <motion.div
-        className="item-card-stack"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-      >
-        <div className="stack-card-content">
-          {/* Image Section - Fixed Grid */}
-          <div className="stack-image-grid">
+    <motion.div
+      className="item-card"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+    >
+        <div className="card-content">
+          {/* Image Section */}
+          <div className="card-image-wrapper">
             {item.imageUrl ? (
               <img 
                 src={item.imageUrl} 
                 alt={item.name} 
                 loading="lazy"
-                className="stack-image"
+                className="card-image"
               />
             ) : (
-              <div className="stack-image-placeholder">
+              <div className="card-image-placeholder">
                 <i className="bi bi-image"></i>
               </div>
             )}
           </div>
 
           {/* Content Section */}
-          <div className="stack-card-info">
-            <div className="stack-header">
-              <h3 className="stack-name">{item.name}</h3>
-              <span className="stack-price">₹{item.price}</span>
+          <div className="card-info">
+            <div className="card-header">
+              <h3 className="card-name">{item.name}</h3>
+              <span className="card-price">₹{item.price}</span>
             </div>
 
             {item.description && (
-              <p className="stack-description">{item.description}</p>
+              <p className="card-description">{item.description}</p>
             )}
 
-            <div className="stack-actions">
-              <div className="stack-qty-control">
+            <div className="card-actions">
+              <div className="qty-control">
                 <button
-                  className="qty-stack-btn"
+                  className="qty-btn"
                   onClick={handleDecrement}
                   disabled={quantity <= 1}
                   aria-label="Decrease"
                 >
                   <i className="bi bi-minus"></i>
                 </button>
-                <span className="qty-stack-value">{quantity}</span>
+                <span className="qty-value">{quantity}</span>
                 <button
-                  className="qty-stack-btn"
+                  className="qty-btn"
                   onClick={handleIncrement}
                   disabled={quantity >= 10}
                   aria-label="Increase"
@@ -97,6 +95,5 @@ export default function ItemCard({ item, index = 0 }) {
           </div>
         </div>
       </motion.div>
-    </ScrollStackItem>
   );
 }

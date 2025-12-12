@@ -1,0 +1,24 @@
+.squares-canvas {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  pointer-events: all;
+}
+
+.squares-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.6;
+  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+}
+
+.squares-background canvas {
+  pointer-events: all;
+  mix-blend-mode: multiply;
+}
