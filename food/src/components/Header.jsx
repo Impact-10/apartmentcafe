@@ -19,22 +19,22 @@ export default function Header({ activeMeal, onMealChange }) {
               <p>Culinary Excellence</p>
             </div>
           </div>
+          
+          <nav className="meal-tabs-clean">
+            {meals.map((meal) => (
+              <motion.button
+                key={meal.id}
+                className={`meal-tab-clean ${activeMeal === meal.id ? 'active' : ''}`}
+                onClick={() => onMealChange(meal.id)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <i className={`bi ${meal.icon}`}></i>
+                <span>{meal.label}</span>
+              </motion.button>
+            ))}
+          </nav>
         </div>
-        
-        <nav className="meal-tabs-clean">
-          {meals.map((meal) => (
-            <motion.button
-              key={meal.id}
-              className={`meal-tab-clean ${activeMeal === meal.id ? 'active' : ''}`}
-              onClick={() => onMealChange(meal.id)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <i className={`bi ${meal.icon}`}></i>
-              <span>{meal.label}</span>
-            </motion.button>
-          ))}
-        </nav>
       </div>
     </header>
   );

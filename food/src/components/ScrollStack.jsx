@@ -214,19 +214,21 @@ const ScrollStack = ({
       const lenis = new Lenis({
         wrapper: scroller,
         content: scroller.querySelector('.scroll-stack-inner'),
-        duration: 1.2,
-        easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 1.5,
+        easing: t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
         smoothWheel: true,
-        touchMultiplier: 2,
+        touchMultiplier: 1.8,
         infinite: false,
         gestureOrientationHandler: true,
         normalizeWheel: true,
-        wheelMultiplier: 1,
-        touchInertiaMultiplier: 35,
-        lerp: 0.1,
+        wheelMultiplier: 0.9,
+        touchInertiaMultiplier: 25,
+        lerp: 0.08,
         syncTouch: true,
-        syncTouchLerp: 0.075,
-        touchInertia: 0.6
+        syncTouchLerp: 0.1,
+        touchInertia: 0.4,
+        autoResize: true,
+        prevent: (node) => node.classList.contains('meal-tab-clean')
       });
 
       lenis.on('scroll', handleScroll);
