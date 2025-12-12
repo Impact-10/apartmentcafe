@@ -1,0 +1,495 @@
+/* ============================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   ============================================ */
+
+/* ============================================
+   EXTRA SMALL DEVICES (Mobile: 0 - 480px)
+   ============================================ */
+@media (max-width: 480px) {
+  /* Root & Base */
+  :root {
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  /* Header */
+  .header {
+    padding: 1rem 0;
+  }
+
+  .header-brand h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-brand i {
+    font-size: 1.5rem;
+  }
+
+  .header-tagline {
+    font-size: 0.875rem;
+  }
+
+  /* Main Content */
+  .main-content {
+    padding: 1.5rem 0;
+  }
+
+  /* Menu Section */
+  .menu-section {
+    margin-bottom: 2rem;
+  }
+
+  .section-header {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .section-header i {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .item-count {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* Menu Grid - Single Column on Mobile */
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Item Card */
+  .item-image {
+    height: 150px;
+  }
+
+  .item-content {
+    padding: 1rem;
+  }
+
+  .item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .item-name {
+    font-size: 1rem;
+  }
+
+  .item-price {
+    font-size: 1rem;
+    margin-left: 0;
+  }
+
+  .item-description {
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .item-actions {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* Quantity Control */
+  .quantity-control {
+    gap: 0.25rem;
+    padding: 0.15rem;
+  }
+
+  .qty-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+  }
+
+  .qty-value {
+    min-width: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  /* Buttons */
+  .add-btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    gap: 0.25rem;
+  }
+
+  .add-btn i {
+    font-size: 0.875rem;
+  }
+
+  /* Cart Floating Button */
+  .cart-floating {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .cart-text {
+    display: none;
+  }
+
+  .cart-floating i {
+    font-size: 1.25rem;
+  }
+
+  /* Modal */
+  .modal {
+    width: 95%;
+    max-width: 100%;
+    max-height: 85vh;
+  }
+
+  .cart-modal {
+    max-height: 80vh;
+    bottom: 0;
+  }
+
+  .checkout-modal {
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.125rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  /* Cart Items */
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .cart-item-info {
+    width: 100%;
+  }
+
+  .cart-item-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cart-item-total {
+    min-width: auto;
+  }
+
+  .remove-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Cart Summary */
+  .cart-total {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .checkout-btn {
+    padding: 0.875rem;
+    font-size: 1rem;
+  }
+
+  /* Checkout Form */
+  .checkout-form {
+    gap: 1rem;
+  }
+
+  .form-group input {
+    padding: 0.625rem 0.875rem;
+    font-size: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+  }
+
+  /* Error Messages */
+  .error-text,
+  .error-message {
+    font-size: 0.75rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 1.5rem 0;
+    font-size: 0.75rem;
+  }
+
+  .footer-content {
+    gap: 1rem;
+  }
+}
+
+/* ============================================
+   SMALL DEVICES (Mobile: 481px - 640px)
+   ============================================ */
+@media (min-width: 481px) and (max-width: 640px) {
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .header-brand h1 {
+    font-size: 1.75rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .item-image {
+    height: 180px;
+  }
+
+  .cart-floating {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .cart-text {
+    display: inline;
+  }
+
+  .modal {
+    width: 90%;
+  }
+
+  .cart-item {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* ============================================
+   TABLET: (641px - 1024px)
+   ============================================ */
+@media (min-width: 641px) {
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .header {
+    padding: 2rem 0;
+  }
+
+  .header-brand h1 {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .item-image {
+    height: 200px;
+  }
+
+  .cart-floating {
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+  }
+
+  .cart-text {
+    display: inline;
+  }
+
+  .modal {
+    width: 85%;
+    max-width: 600px;
+  }
+
+  .cart-modal {
+    max-height: 85vh;
+  }
+
+  .cart-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* ============================================
+   MEDIUM SCREENS (769px - 1024px)
+   ============================================ */
+@media (min-width: 769px) {
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .item-card {
+    min-height: 400px;
+  }
+
+  .item-actions {
+    gap: 1rem;
+  }
+
+  .modal {
+    width: 80%;
+  }
+}
+
+/* ============================================
+   LARGE SCREENS (Desktop: 1025px+)
+   ============================================ */
+@media (min-width: 1025px) {
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .item-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .modal {
+    width: 600px;
+    max-width: 90%;
+  }
+
+  .cart-floating:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* ============================================
+   EXTRA LARGE SCREENS (1441px+)
+   ============================================ */
+@media (min-width: 1441px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION (Mobile)
+   ============================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+  .header {
+    padding: 0.75rem 0;
+  }
+
+  .header-brand h1 {
+    font-size: 1.25rem;
+  }
+
+  .header-tagline {
+    display: none;
+  }
+
+  .main-content {
+    padding: 1rem 0;
+  }
+
+  .modal {
+    max-height: 95vh;
+  }
+
+  .cart-modal {
+    max-height: 95vh;
+  }
+
+  .modal-body {
+    max-height: calc(95vh - 80px);
+  }
+}
+
+/* ============================================
+   HIGH DPI / RETINA DISPLAYS
+   ============================================ */
+@media (min-resolution: 192dpi) {
+  .item-image img {
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT (Optional)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1e1e1e;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --border-color: #404040;
+  }
+
+  body {
+    background-color: var(--bg-secondary);
+  }
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .item-card:hover {
+    transform: none;
+  }
+
+  .add-btn:active {
+    transform: scale(0.98);
+  }
+
+  .qty-btn,
+  .remove-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .close-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .checkout-btn {
+    min-height: 48px;
+  }
+}

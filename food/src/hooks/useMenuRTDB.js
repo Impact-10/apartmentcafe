@@ -11,7 +11,7 @@ export function useMenuRTDB() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const menuRef = ref(db, '/');
+    const menuRef = ref(db, '/activeMenu');
     setLoading(true);
 
     const unsubscribe = onValue(

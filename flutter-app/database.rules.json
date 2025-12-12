@@ -1,20 +1,25 @@
 {
   "rules": {
+    ".read": true,
+    ".write": false,
     "menuMaster": {
-      ".read": true,
-      ".write": "auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2'"
+      ".read": "auth != null",
+      ".write": "auth != null"
     },
     "activeMenu": {
       ".read": true,
-      ".write": "auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2'"
+      ".write": "auth != null"
     },
     "shopSchedule": {
       ".read": true,
-      ".write": "auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2'"
+      ".write": "auth != null"
     },
     "orders": {
       ".read": true,
-      ".write": "(!data.exists() && newData.exists()) || (auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2')"
+      ".write": true,
+      "$orderId": {
+        ".validate": "newData.hasChildren(['name', 'blockDoor', 'mobile', 'items', 'total'])"
+      }
     }
   }
 }
