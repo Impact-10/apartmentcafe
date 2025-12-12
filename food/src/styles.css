@@ -61,7 +61,7 @@ body {
 .header-clean {
   background: white;
   border-bottom: 1px solid #f0f0f0;
-  padding: 1.5rem 0;
+  padding: 2rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -72,22 +72,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .header-brand-clean {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .header-brand-clean i {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: var(--primary-color);
 }
 
 .brand-text h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
   margin: 0;
   color: #1a1a1a;
@@ -95,37 +95,37 @@ body {
 }
 
 .brand-text p {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #999;
-  margin: 0.25rem 0 0 0;
+  margin: 0.4rem 0 0 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   font-weight: 600;
 }
 
 .meal-tabs-clean {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
 .meal-tab-clean {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.65rem;
+  padding: 0.9rem 2rem;
   background: #f9f9f9;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .meal-tab-clean i {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .meal-tab-clean:hover {
@@ -1277,20 +1277,28 @@ button:focus-visible {
     padding: 0 1rem;
   }
 
-  .header {
-    padding: 1.2rem 0;
+  .header,
+  .header-clean {
+    padding: 1.5rem 0;
   }
 
-  .header-brand h1 {
+  .header-brand h1,
+  .brand-text h1 {
     font-size: 1.8rem;
   }
 
-  .meal-tabs {
-    gap: 0.8rem;
+  .header-brand-clean i {
+    font-size: 2.5rem;
   }
 
-  .meal-tab {
-    padding: 0.7rem 1.2rem;
+  .meal-tabs,
+  .meal-tabs-clean {
+    gap: 0.85rem;
+  }
+
+  .meal-tab,
+  .meal-tab-clean {
+    padding: 0.8rem 1.5rem;
     font-size: 0.95rem;
   }
 
@@ -1353,27 +1361,37 @@ button:focus-visible {
     padding: 0 0.75rem;
   }
 
-  .header {
-    padding: 1rem 0;
+  .header,
+  .header-clean {
+    padding: 1.2rem 0;
   }
 
-  .header-brand h1 {
-    font-size: 1.5rem;
+  .header-brand h1,
+  .brand-text h1 {
+    font-size: 1.6rem;
   }
 
-  .header-brand i {
-    font-size: 1.3rem;
+  .header-brand i,
+  .header-brand-clean i {
+    font-size: 2rem;
   }
 
-  .meal-tabs {
-    gap: 0.6rem;
+  .brand-text p {
+    font-size: 0.7rem;
+    margin: 0.3rem 0 0 0;
+  }
+
+  .meal-tabs,
+  .meal-tabs-clean {
+    gap: 0.7rem;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .meal-tab {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
+  .meal-tab,
+  .meal-tab-clean {
+    padding: 0.75rem 1.3rem;
+    font-size: 0.9rem;
     white-space: nowrap;
   }
 
