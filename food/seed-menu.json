@@ -1,0 +1,13 @@
+{
+  "m1": {"name": "Poori", "price": 45, "meal": "breakfast", "enabled": true, "imageUrl": "", "description": "Fluffy poori with potato curry"},
+  "m2": {"name": "Plain dosa", "price": 55, "meal": "breakfast", "enabled": true, "imageUrl": "", "description": "Crisp dosa with chutney & sambar"},
+  "m3": {"name": "Masala dosa", "price": 70, "meal": "breakfast", "enabled": true, "imageUrl": "", "description": "Masala filling with chutney & sambar"},
+  "m4": {"name": "Idli vada", "price": 60, "meal": "breakfast", "enabled": true, "imageUrl": "", "description": "Two idlis and vada with sambar"},
+  "m5": {"name": "Veg meals", "price": 120, "meal": "lunch", "enabled": true, "imageUrl": "", "description": "Rice, sambar, rasam, sides"},
+  "m6": {"name": "Curd rice", "price": 70, "meal": "lunch", "enabled": true, "imageUrl": "", "description": "Comfort curd rice"},
+  "m7": {"name": "Lemon rice", "price": 75, "meal": "lunch", "enabled": true, "imageUrl": "", "description": "Lemon tadka rice"},
+  "m8": {"name": "Veg fried rice", "price": 110, "meal": "snack", "enabled": true, "imageUrl": "", "description": "Street-style fried rice"},
+  "m9": {"name": "Paneer roll", "price": 90, "meal": "snack", "enabled": true, "imageUrl": "", "description": "Paneer kathi roll"},
+  "m10": {"name": "Chapati + kurma", "price": 85, "meal": "dinner", "enabled": true, "imageUrl": "", "description": "Two chapatis with kurma"},
+  "m11": {"name": "Veg biryani", "price": 130, "meal": "dinner", "enabled": true, "imageUrl": "", "description": "Aromatic dum biryani"}
+}

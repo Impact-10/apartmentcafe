@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "menuMaster": {
+      ".read": true,
+      ".write": "auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2'"
+    },
+    "activeMenu": {
+      ".read": true,
+      ".write": "auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2'"
+    },
+    "shopSchedule": {
+      ".read": true,
+      ".write": "auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2'"
+    },
+    "orders": {
+      ".read": true,
+      ".write": "(!data.exists() && newData.exists()) || (auth != null && auth.uid === 'gyiR11vZLnZO3ccMF9UphetxhrA2')"
+    }
+  }
+}

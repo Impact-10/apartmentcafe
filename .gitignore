@@ -1,0 +1,102 @@
+# ⚠️  SECRETS & ENVIRONMENT VARIABLES - NEVER COMMIT
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# 🔑 Firebase config files with credentials
+firebase-service-account.json
+*-service-account*.json
+google-services.json
+GoogleService-Info.plist
+
+# 📦 Node Dependencies
+node_modules/
+**/node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# 🔨 Build Outputs
+dist/
+build/
+**/dist/
+**/build/
+*.app
+*.bundle
+*.ipa
+*.apk
+*.aab
+
+# 📱 Flutter specific
+flutter-app/.dart_tool/
+flutter-app/.flutter-plugins
+flutter-app/.flutter-plugins-dependencies
+flutter-app/.packages
+flutter-app/build/
+flutter-app/.pub-cache/
+flutter-app/.pub/
+flutter-app/coverage/
+flutter-app/pubspec.lock
+
+# 💻 IDE & Editor
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# 🔍 Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+pnpm-debug.log*
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# 🧪 Testing
+coverage/
+.nyc_output/
+
+# 🌐 Web build cache
+dist/
+.next/
+out/
+
+# 🔐 Private keys & credentials
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+**/private/
+
+# 📄 OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# 🎯 Production-only files (keep examples, not actual configs)
+.env.production
+firebase.json.backup
+**/credentials/
+**/secrets/

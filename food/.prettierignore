@@ -1,0 +1,8 @@
+# Prettier ignore file
+node_modules
+dist
+build
+.firebase
+*.min.js
+*.min.css
+package-lock.json

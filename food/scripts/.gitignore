@@ -1,0 +1,6 @@
+# Place your Firebase service account key here
+# Download from: Firebase Console > Project Settings > Service Accounts > Generate New Private Key
+# Name it: service-account-key.json
+
+# DO NOT COMMIT THIS FILE TO GIT!
+service-account-key.json

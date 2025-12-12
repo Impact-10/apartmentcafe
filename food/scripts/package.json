@@ -1,0 +1,11 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "Utility scripts for apartment-cafe",
+  "scripts": {
+    "seed": "node seed-data.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.11.0"
+  }
+}
