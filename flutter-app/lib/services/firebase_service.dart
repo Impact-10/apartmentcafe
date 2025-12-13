@@ -159,7 +159,7 @@ class FirebaseService {
   }
 
   Future<void> updateOrderStatus(String orderId, String newStatus) async {
-    final updates = {
+    final updates = <String, dynamic>{
       'status': newStatus,
     };
     
