@@ -5,8 +5,10 @@ class Order {
   final String mobile;
   final Map<String, CartItem> items;
   final int total;
-  final String status; // 'pending', 'accepted', 'completed'
+  final String status; // 'pending', 'accepted', 'delivered'
   final DateTime createdAt;
+  final DateTime? acceptedAt;
+  final DateTime? deliveredAt;
 
   Order({
     required this.id,
@@ -17,6 +19,8 @@ class Order {
     required this.total,
     required this.status,
     required this.createdAt,
+    this.acceptedAt,
+    this.deliveredAt,
   });
 
   factory Order.fromMap(String id, Map<dynamic, dynamic> data) {
@@ -40,6 +44,12 @@ class Order {
       createdAt: data['createdAt'] is int
           ? DateTime.fromMillisecondsSinceEpoch(data['createdAt'])
           : DateTime.now(),
+      acceptedAt: data['acceptedAt'] is int
+          ? DateTime.fromMillisecondsSinceEpoch(data['acceptedAt'])
+          : null,
+      deliveredAt: data['deliveredAt'] is int
+          ? DateTime.fromMillisecondsSinceEpoch(data['deliveredAt'])
+          : null,
     );
   }
 
