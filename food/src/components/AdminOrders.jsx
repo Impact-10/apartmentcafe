@@ -1,23 +1,33 @@
 import { useEffect, useMemo, useState } from 'react';
 import { signOut } from 'firebase/auth';
-import { ref, update } from 'firebase/database';
+import { ref, update, get } from 'firebase/database';
 import { auth, db } from '../lib/firebase';
-import { adminAccept, listenOrdersHistory, listenOrdersPending } from '../lib/ordersRTDB';
+import {
+  adminUpdateStatus,
+  archiveOrder,
+  listenOrdersPending,
+  listenOrdersAccepted,
+  listenOrdersDelivered
+} from '../lib/ordersRTDB';
 import { useMenuRTDB } from '../hooks/useMenuRTDB';
 import { motion } from 'framer-motion';
 
 export default function AdminOrders({ user }) {
   const [pending, setPending] = useState([]);
-  const [history, setHistory] = useState([]);
+  const [accepted, setAccepted] = useState([]);
+  const [delivered, setDelivered] = useState([]);
   const [processing, setProcessing] = useState(new Set());
   const { allMenu, loading: menuLoading } = useMenuRTDB();
 
   useEffect(() => {
     const stopPending = listenOrdersPending(setPending);
-    const stopHistory = listenOrdersHistory(setHistory, 30);
+    const stopAccepted = listenOrdersAccepted(setAccepted);
+    const stopDelivered = listenOrdersDelivered(setDelivered);
+    
     return () => {
       stopPending();
-      stopHistory();
+      stopAccepted();
+      stopDelivered();
     };
   }, []);
 
@@ -27,10 +37,26 @@ export default function AdminOrders({ user }) {
     return map;
   }, [allMenu]);
 
-  const handleAccept = async (orderId) => {
+  const handleStatusChange = async (orderId, newStatus) => {
     setProcessing((prev) => new Set(prev).add(orderId));
     try {
-      await adminAccept(orderId);
+      await adminUpdateStatus(orderId, newStatus);
+      
+      // If status changed to delivered, archive after brief delay
+      if (newStatus === 'delivered') {
+        setTimeout(async () => {
+          try {
+            // Fetch the order data before archiving
+            const orderRef = ref(db, `orders/${orderId}`);
+            const snapshot = await get(orderRef);
+            if (snapshot.exists()) {
+              await archiveOrder(orderId, snapshot.val());
+            }
+          } catch (err) {
+            console.error('Failed to archive order:', err);
+          }
+        }, 3000); // 3 second delay before archiving
+      }
     } catch (err) {
       alert(err.message || 'Failed to update order');
     } finally {
@@ -81,6 +107,7 @@ export default function AdminOrders({ user }) {
       </div>
 
       <div className="admin-content">
+        {/* Pending Orders Section */}
         <section className="orders-section">
           <h2><i className="bi bi-clock-history"></i> Pending ({pending.length})</h2>
           {pending.length === 0 ? (
@@ -126,7 +153,7 @@ export default function AdminOrders({ user }) {
                     </div>
                     <button
                       className="action-btn accept-btn"
-                      onClick={() => handleAccept(order.id)}
+                      onClick={() => handleStatusChange(order.id, 'accepted')}
                       disabled={processing.has(order.id)}
                     >
                       {processing.has(order.id) ? 'Updating...' : 'Accept'}
@@ -138,27 +165,91 @@ export default function AdminOrders({ user }) {
           )}
         </section>
 
+        {/* Accepted Orders Section */}
         <section className="orders-section">
-          <h2><i className="bi bi-journal-check"></i> Recent Orders</h2>
-          {history.length === 0 ? (
+          <h2><i className="bi bi-check-circle"></i> Accepted ({accepted.length})</h2>
+          {accepted.length === 0 ? (
             <div className="empty-state">
               <i className="bi bi-inbox"></i>
-              <p>No history yet</p>
+              <p>No accepted orders</p>
+            </div>
+          ) : (
+            <div className="orders-list">
+              {accepted.map((order) => (
+                <motion.div
+                  key={order.id}
+                  className="order-card"
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <div className="order-header">
+                    <div>
+                      <h3>{order.name}</h3>
+                      <p className="order-meta">
+                        <i className="bi bi-building"></i> {order.blockDoor}
+                        <span className="divider">•</span>
+                        <i className="bi bi-phone"></i> {order.mobile}
+                      </p>
+                    </div>
+                    <span className="status-badge status-accepted">accepted</span>
+                  </div>
+
+                  <div className="order-items">
+                    {order.items && Object.entries(order.items).map(([id, item]) => (
+                      <div key={id} className="order-item">
+                        <span>{item.name} × {item.qty}</span>
+                        <span>₹{item.price * item.qty}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="order-footer">
+                    <div className="order-total">
+                      <strong>Total: ₹{order.total}</strong>
+                      <span className="order-time">{formatTime(order.acceptedAt || order.createdAt)}</span>
+                    </div>
+                    <button
+                      className="action-btn deliver-btn"
+                      onClick={() => handleStatusChange(order.id, 'delivered')}
+                      disabled={processing.has(order.id)}
+                    >
+                      {processing.has(order.id) ? 'Updating...' : 'Mark Delivered'}
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Delivered Orders Section */}
+        <section className="orders-section">
+          <h2><i className="bi bi-check-circle-fill"></i> Delivered ({delivered.length})</h2>
+          {delivered.length === 0 ? (
+            <div className="empty-state">
+              <i className="bi bi-inbox"></i>
+              <p>No delivered orders yet</p>
             </div>
           ) : (
             <div className="orders-list compact">
-              {history.map((order) => (
-                <div key={order.id} className="order-row">
+              {delivered.map((order) => (
+                <motion.div
+                  key={order.id}
+                  className="order-row delivered"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
                   <div>
                     <strong>{order.name}</strong>
                     <span className="small-meta"> {order.blockDoor} • {order.mobile}</span>
                   </div>
                   <div className="order-row-meta">
-                    <span className={`status-pill status-${order.status}`}>{order.status}</span>
+                    <span className="status-pill status-delivered">delivered</span>
                     <span>₹{order.total}</span>
-                    <span className="small-meta">{formatTime(order.createdAt)}</span>
+                    <span className="small-meta">{formatTime(order.deliveredAt || order.createdAt)}</span>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}

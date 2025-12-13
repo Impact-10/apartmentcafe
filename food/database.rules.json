@@ -18,7 +18,16 @@
       ".read": true,
       ".write": true,
       "$orderId": {
-        ".validate": "newData.hasChildren(['name', 'blockDoor', 'mobile', 'items', 'total'])"
+        ".validate": "newData.hasChildren(['name', 'blockDoor', 'mobile', 'items', 'total', 'status'])"
+      }
+    },
+    "ordersHistory": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$date": {
+        "$orderId": {
+          ".validate": "newData.hasChildren(['name', 'blockDoor', 'mobile', 'items', 'total', 'status'])"
+        }
       }
     }
   }

@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import MenuSection from './components/MenuSection';
 import CartFloating from './components/CartFloating';
 import CartModal from './components/CartModal';
+import OrderTracker from './components/OrderTracker';
 import AdminLogin from './components/AdminLogin';
 import AdminOrders from './components/AdminOrders';
 import { useMenuRTDB } from './hooks/useMenuRTDB';
@@ -88,6 +89,7 @@ function HomePage() {
       <Footer />
       <CartFloating />
       <CartModal />
+      <OrderTracker />
     </>
   );
 }

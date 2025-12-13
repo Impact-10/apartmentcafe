@@ -84,8 +84,11 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
         total
       });
 
+      // Store orderId in localStorage for session-based tracking
+      localStorage.setItem('lastOrderId', orderId);
+
       recordOrderPlacement();
-      setSuccessMessage(`Order placed! ID: ${orderId}`);
+      setSuccessMessage(`Order placed successfully! Track your order at the bottom.`);
       clearCart();
       setFormData({ name: '', blockDoor: '', mobile: '' });
 

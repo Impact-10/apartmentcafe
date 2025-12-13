@@ -922,7 +922,32 @@ body {
   color: #c1440e;
 }
 
-.status-badge.status-completed {
+.status-badge.status-delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Status pills for compact view */
+.status-pill {
+  padding: 0.25rem 0.625rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.status-pill.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-pill.status-accepted {
+  background-color: #ffe5d9;
+  color: #c1440e;
+}
+
+.status-pill.status-delivered {
   background-color: #d4edda;
   color: #155724;
 }
@@ -991,12 +1016,12 @@ body {
   background-color: var(--primary-dark);
 }
 
-.complete-btn {
+.deliver-btn {
   background-color: var(--success-color);
   color: white;
 }
 
-.complete-btn:hover:not(:disabled) {
+.deliver-btn:hover:not(:disabled) {
   background-color: #27ae60;
 }
 
@@ -2083,4 +2108,97 @@ button:focus-visible {
   font-weight: 500;
   color: #666;
 }
-/* Rebuild trigger */
+
+/* ============================================
+   ORDER TRACKER (BOTTOM BAR)
+   ============================================ */
+.order-tracker {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 3px solid var(--primary-color);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  padding: 1.2rem 1.5rem;
+}
+
+.tracker-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tracker-icon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tracker-info {
+  flex: 1;
+}
+
+.tracker-title {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tracker-status {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-top: 0.2rem;
+}
+
+.tracker-progress {
+  flex: 1;
+  max-width: 200px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .order-tracker {
+    padding: 1rem;
+  }
+
+  .tracker-content {
+    gap: 0.75rem;
+  }
+
+  .tracker-icon {
+    font-size: 1.5rem;
+  }
+
+  .tracker-title {
+    font-size: 0.75rem;
+  }
+
+  .tracker-status {
+    font-size: 0.95rem;
+  }
+
+  .tracker-progress {
+    max-width: 120px;
+  }
+}
