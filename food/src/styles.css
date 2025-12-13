@@ -451,7 +451,7 @@ body {
   z-index: 1001;
   max-width: 600px;
   width: 90%;
-  max-height: 90vh;
+  max-height: 85vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -512,6 +512,8 @@ body {
   padding: 1.5rem;
   overflow-y: auto;
   flex: 1;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 /* ============================================
@@ -1293,14 +1295,14 @@ button:focus-visible {
   }
 
   .card-content {
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 1fr;
     padding: 1.5rem;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .card-image-wrapper {
-    width: 240px;
-    height: 180px;
+    width: 100%;
+    height: 220px;
   }
 
   .card-name {
@@ -1372,16 +1374,23 @@ button:focus-visible {
 
   .meal-tabs,
   .meal-tabs-clean {
-    gap: 0.7rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
   }
 
   .meal-tab,
   .meal-tab-clean {
-    padding: 0.75rem 1.3rem;
-    font-size: 0.9rem;
-    white-space: nowrap;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .meal-tab i,
+  .meal-tab-clean i {
+    font-size: 1.3rem;
   }
 
   .section-title {
@@ -1395,8 +1404,42 @@ button:focus-visible {
 
   .card-content {
     grid-template-columns: 1fr;
-    padding: 1.5rem;
-    gap: 1.5rem;
+    padding: 1.25rem;
+    gap: 1rem;
+    min-height: auto;
+  }
+
+  .card-image-wrapper {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+  }
+
+  .card-name {
+    font-size: 1.3rem;
+  }
+
+  .card-price {
+    font-size: 1.2rem;
+  }
+
+  .card-description {
+    font-size: 0.9rem;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .qty-control {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .card-image-wrapper {
