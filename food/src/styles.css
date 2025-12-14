@@ -408,7 +408,7 @@ body {
 
 /* Adjust when tracker or modal is present */
 body.has-tracker .cart-floating {
-  bottom: 80px;
+  bottom: 100px;
 }
 
 body.modal-open .order-tracker {
@@ -1431,7 +1431,7 @@ button:focus-visible {
   }
 
   body.has-tracker .cart-floating {
-    bottom: 90px !important;
+    bottom: 110px !important;
   }
 }
 
@@ -1640,7 +1640,7 @@ button:focus-visible {
   }
 
   body.has-tracker .cart-floating {
-    bottom: 90px !important;
+    bottom: 110px !important;
   }
 
   .cart-text {
