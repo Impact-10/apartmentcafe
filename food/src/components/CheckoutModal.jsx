@@ -87,6 +87,9 @@ export default function CheckoutModal({ isOpen, onClose, onSuccess }) {
       // Store orderId in localStorage for session-based tracking
       localStorage.setItem('lastOrderId', orderId);
 
+      // Dispatch custom event so OrderTracker starts listening immediately
+      window.dispatchEvent(new Event('orderPlaced'));
+
       recordOrderPlacement();
       setSuccessMessage(`Order placed successfully! Track your order at the bottom.`);
       clearCart();

@@ -33,4 +33,6 @@ class ConnectionProvider with ChangeNotifier {
   bool isPending(String operationId) {
     return _pendingOperations.contains(operationId);
   }
+
+  bool get hasPendingOperations => _pendingOperations.isNotEmpty;
 }

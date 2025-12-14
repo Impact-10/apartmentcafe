@@ -67,6 +67,61 @@ class FirebaseService {
     });
   }
 
+  // Stream active menu as Map (for menu tab redesign)
+  Stream<Map<String, MenuItem>> streamActivemMenuMap() {
+    return _database.ref('activeMenu').onValue.map((event) {
+      final items = <String, MenuItem>{};
+      if (event.snapshot.value is Map) {
+        (event.snapshot.value as Map).forEach((key, value) {
+          if (value is Map) {
+            items[key] = MenuItem.fromMap(key, value);
+          }
+        });
+      }
+      return items;
+    });
+  }
+
+  // Stream master menu as Map (for menu tab redesign)
+  Stream<Map<String, MenuItem>> streamMasterMenu() {
+    return _database.ref('menuMaster').onValue.map((event) {
+      final items = <String, MenuItem>{};
+      if (event.snapshot.value is Map) {
+        (event.snapshot.value as Map).forEach((key, value) {
+          if (value is Map) {
+            items[key] = MenuItem.fromMap(key, value);
+          }
+        });
+      }
+      return items;
+    });
+  }
+
+  // Add item to active menu
+  Future<void> addToActiveMenu(MenuItem item) {
+    return _database.ref('activeMenu/${item.id}').set(item.toMap());
+  }
+
+  // Remove item from active menu
+  Future<void> removeFromActiveMenu(String itemId) {
+    return _database.ref('activeMenu/$itemId').remove();
+  }
+
+  // Add master menu item (alias for addMenuMasterItem)
+  Future<void> addMasterMenuItem(MenuItem item) {
+    return addMenuMasterItem(item);
+  }
+
+  // Update master menu item (alias for updateMenuMasterItem)
+  Future<void> updateMasterMenuItem(MenuItem item) {
+    return updateMenuMasterItem(item.id, item);
+  }
+
+  // Delete master menu item (alias for deleteMenuMasterItem)
+  Future<void> deleteMasterMenuItem(String itemId) {
+    return deleteMenuMasterItem(itemId);
+  }
+
   // Publish active menu (admin): full replace, no duplicates
   Future<void> publishActiveMenu(Map<String, Map<String, dynamic>> menuMap) {
     return _database.ref('activeMenu').set(menuMap);

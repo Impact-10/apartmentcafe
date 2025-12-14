@@ -10,7 +10,6 @@ import 'screens/admin/admin_home_redesign.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase with hardcoded config (from .env.local values)
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: 'AIzaSyCVGJkGudLVlzJHRE4JACqEcE--Qxonpe8',
@@ -23,7 +22,6 @@ void main() async {
     ),
   );
 
-  // Enable offline persistence
   final db = FirebaseDatabase.instance;
   db.setPersistenceEnabled(true);
   db.setPersistenceCacheSizeBytes(10000000);
@@ -36,33 +34,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ConnectionProvider()),
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => ConnectionProvider(),
       child: MaterialApp(
         title: 'Apartment Café Admin',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
             seedColor: const Color(0xFFFF6B35),
-            primary: const Color(0xFFFF6B35),
-            secondary: const Color(0xFF004E89),
-            surface: Colors.white,
+            brightness: Brightness.light,
           ),
           scaffoldBackgroundColor: const Color(0xFFF8F9FA),
+          useMaterial3: true,
           appBarTheme: const AppBarTheme(
             centerTitle: false,
             elevation: 0,
             backgroundColor: Colors.white,
             foregroundColor: Color(0xFF2C3E50),
-            surfaceTintColor: Colors.transparent,
           ),
           cardTheme: const CardThemeData(
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
+              side: BorderSide(color: Color(0xFFE0E0E0), width: 1),
             ),
             color: Colors.white,
           ),
@@ -74,48 +68,6 @@ class MyApp extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
-          ),
-          inputDecorationTheme: InputDecorationTheme(
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Color(0xFFFF6B35), width: 2),
-            ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          ),
-          navigationBarTheme: NavigationBarThemeData(
-            backgroundColor: Colors.white,
-            elevation: 8,
-            indicatorColor: const Color(0xFFFF6B35).withValues(alpha: 0.1),
-            labelTextStyle: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.selected)) {
-                return const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFFFF6B35),
-                );
-              }
-              return const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF7F8C8D),
-              );
-            }),
-            iconTheme: WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.selected)) {
-                return const IconThemeData(color: Color(0xFFFF6B35));
-              }
-              return const IconThemeData(color: Color(0xFF7F8C8D));
-            }),
           ),
         ),
         home: const AuthWrapper(),
@@ -139,11 +91,9 @@ class AuthWrapper extends StatelessWidget {
         }
 
         if (snapshot.hasData) {
-          // User is logged in (admin)
           return const AdminHomeRedesign();
         }
 
-        // Not logged in - show admin login
         return const AdminLoginRedesign();
       },
     );

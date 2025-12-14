@@ -12,17 +12,40 @@ export default function OrderTracker() {
   const [orderStatus, setOrderStatus] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [activeOrderId, setActiveOrderId] = useState(null);
+
+  // Watch for localStorage changes (new orders)
+  useEffect(() => {
+    const checkForOrder = () => {
+      const lastOrderId = localStorage.getItem('lastOrderId');
+      setActiveOrderId(lastOrderId);
+    };
+
+    // Check immediately on mount
+    checkForOrder();
+
+    // Listen for custom event when new order is placed
+    window.addEventListener('orderPlaced', checkForOrder);
+    
+    // Also listen to storage events (cross-tab sync)
+    window.addEventListener('storage', checkForOrder);
+
+    return () => {
+      window.removeEventListener('orderPlaced', checkForOrder);
+      window.removeEventListener('storage', checkForOrder);
+    };
+  }, []);
 
   useEffect(() => {
-    // Check if there's an active order in localStorage
-    const lastOrderId = localStorage.getItem('lastOrderId');
-    
-    if (!lastOrderId) {
+    if (!activeOrderId) {
+      setOrderStatus(null);
+      setIsVisible(false);
+      document.body.classList.remove('has-tracker');
       return;
     }
 
     // Subscribe to order updates (real-time)
-    const orderRef = ref(db, `orders/${lastOrderId}`);
+    const orderRef = ref(db, `orders/${activeOrderId}`);
     
     const unsubscribe = onValue(orderRef, (snapshot) => {
       const data = snapshot.val();
@@ -37,7 +60,7 @@ export default function OrderTracker() {
       }
 
       setOrderStatus({
-        id: lastOrderId,
+        id: activeOrderId,
         status: data.status,
         name: data.name
       });
@@ -59,9 +82,8 @@ export default function OrderTracker() {
     return () => {
       off(orderRef);
       unsubscribe();
-      document.body.classList.remove('has-tracker');
     };
-  }, []);
+  }, [activeOrderId]);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
