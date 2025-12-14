@@ -2285,6 +2285,41 @@ button:focus-visible {
   transition: width 0.5s ease;
 }
 
+.tracker-refresh-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  font-size: 1.2rem;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.tracker-refresh-btn:hover:not(:disabled) {
+  background: #f0f0f0;
+  color: var(--primary-color);
+}
+
+.tracker-refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tracker-refresh-btn .spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @media (max-width: 768px) {
   .order-tracker {
     padding: 1rem;
@@ -2308,6 +2343,12 @@ button:focus-visible {
 
   .tracker-progress {
     max-width: 120px;
+  }
+
+  .tracker-refresh-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
   }
 }
 

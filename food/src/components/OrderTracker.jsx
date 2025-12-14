@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function OrderTracker() {
   const [orderStatus, setOrderStatus] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     // Check if there's an active order in localStorage
@@ -20,7 +21,7 @@ export default function OrderTracker() {
       return;
     }
 
-    // Subscribe to order updates
+    // Subscribe to order updates (real-time)
     const orderRef = ref(db, `orders/${lastOrderId}`);
     
     const unsubscribe = onValue(orderRef, (snapshot) => {
@@ -31,6 +32,7 @@ export default function OrderTracker() {
         localStorage.removeItem('lastOrderId');
         setOrderStatus(null);
         setIsVisible(false);
+        document.body.classList.remove('has-tracker');
         return;
       }
 
@@ -40,6 +42,7 @@ export default function OrderTracker() {
         name: data.name
       });
       setIsVisible(true);
+      document.body.classList.add('has-tracker');
 
       // If delivered, clean up after showing for 5 seconds
       if (data.status === 'delivered') {
@@ -47,6 +50,7 @@ export default function OrderTracker() {
           localStorage.removeItem('lastOrderId');
           setIsVisible(false);
           setOrderStatus(null);
+          document.body.classList.remove('has-tracker');
         }, 5000);
       }
     });
@@ -55,8 +59,42 @@ export default function OrderTracker() {
     return () => {
       off(orderRef);
       unsubscribe();
+      document.body.classList.remove('has-tracker');
     };
   }, []);
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    const lastOrderId = localStorage.getItem('lastOrderId');
+    
+    if (!lastOrderId) {
+      setIsRefreshing(false);
+      return;
+    }
+
+    // Force re-fetch from Firebase
+    const orderRef = ref(db, `orders/${lastOrderId}`);
+    const snapshot = await new Promise((resolve) => {
+      onValue(orderRef, resolve, { onlyOnce: true });
+    });
+    
+    const data = snapshot.val();
+    
+    if (!data) {
+      localStorage.removeItem('lastOrderId');
+      setOrderStatus(null);
+      setIsVisible(false);
+      document.body.classList.remove('has-tracker');
+    } else {
+      setOrderStatus({
+        id: lastOrderId,
+        status: data.status,
+        name: data.name
+      });
+    }
+    
+    setTimeout(() => setIsRefreshing(false), 500);
+  };
 
   if (!isVisible || !orderStatus) {
     return null;
@@ -128,6 +166,15 @@ export default function OrderTracker() {
                 />
               </div>
             </div>
+
+            <button 
+              className="tracker-refresh-btn"
+              onClick={handleRefresh}
+              disabled={isRefreshing}
+              title="Refresh order status"
+            >
+              <i className={`bi bi-arrow-clockwise ${isRefreshing ? 'spinning' : ''}`}></i>
+            </button>
           </div>
         </motion.div>
       )}
