@@ -1427,6 +1427,11 @@ button:focus-visible {
   .cart-floating {
     right: 1rem;
     padding: 0.875rem 1.5rem;
+    bottom: 1rem;
+  }
+
+  body.has-tracker .cart-floating {
+    bottom: 90px !important;
   }
 }
 
@@ -1574,11 +1579,6 @@ button:focus-visible {
     font-size: 1.1rem;
   }
 
-  .cart-floating {
-    bottom: 0.75rem;
-    right: 0.75rem;
-  }
-
   .modal {
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
@@ -1637,6 +1637,10 @@ button:focus-visible {
     right: 1rem;
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
+  }
+
+  body.has-tracker .cart-floating {
+    bottom: 90px !important;
   }
 
   .cart-text {
