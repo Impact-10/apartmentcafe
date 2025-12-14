@@ -76,17 +76,34 @@ class _ActiveMenuTab extends StatelessWidget {
         }
 
         // Group by meal type and sort
+        // Canonicalize meal names and group. Accept any labels (case/space tolerant).
+        String canon(String raw) {
+          final v = (raw.trim().toLowerCase());
+          if (v == 'breakfast' || v == 'bf' || v == 'morning') return 'Breakfast';
+          if (v == 'lunch' || v == 'noon') return 'Lunch';
+          if (v == 'snack' || v == 'snacks' || v == 'evening' || v == 'eve') return 'Snack';
+          if (v == 'dinner' || v == 'night') return 'Dinner';
+          // Fall back to original (capitalized) label so it still shows up
+          if (raw.isEmpty) return 'Other';
+          return raw[0].toUpperCase() + raw.substring(1);
+        }
+
         final mealOrder = ['Breakfast', 'Lunch', 'Snack', 'Dinner'];
         final grouped = <String, List<MenuItem>>{};
         for (final item in masterMenu.values) {
-          grouped.putIfAbsent(item.meal, () => []).add(item);
+          final key = canon(item.meal);
+          grouped.putIfAbsent(key, () => []).add(item);
         }
 
-        final sortedMeals = grouped.keys
-            .toList()
-            .where((m) => mealOrder.contains(m))
-            .toList()
-          ..sort((a, b) => mealOrder.indexOf(a).compareTo(mealOrder.indexOf(b)));
+        final sortedMeals = grouped.keys.toList()
+          ..sort((a, b) {
+            final ai = mealOrder.indexOf(a);
+            final bi = mealOrder.indexOf(b);
+            final ax = ai == -1 ? 999 : ai;
+            final bx = bi == -1 ? 999 : bi;
+            if (ax != bx) return ax.compareTo(bx);
+            return a.compareTo(b);
+          });
 
         if (sortedMeals.isEmpty) {
           return Center(

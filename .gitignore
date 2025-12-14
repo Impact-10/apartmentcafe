@@ -40,6 +40,9 @@ flutter-app/.pub-cache/
 flutter-app/.pub/
 flutter-app/coverage/
 flutter-app/pubspec.lock
+flutter-app/ios/Pods/
+flutter-app/android/.gradle/
+flutter-app/android/app/release/
 
 # 💻 IDE & Editor
 .vscode/
@@ -100,3 +103,5 @@ ehthumbs.db
 firebase.json.backup
 **/credentials/
 **/secrets/
+food/node_modules/
+food/dist/
